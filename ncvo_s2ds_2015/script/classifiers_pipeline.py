@@ -1,4 +1,9 @@
 #!/usr/bin/python
+"""
+Created on Aug 20
+
+@author: Anna MK
+"""
 
 # using split classifiers- different for subsets of features 
 

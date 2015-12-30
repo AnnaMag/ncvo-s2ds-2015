@@ -1,6 +1,11 @@
 #!/usr/bin/python
+"""
+Created on Aug 20
 
-# Running selected classifiers with hardcoded 3 of them: :ogisticRegression(), RandomForestClassifier(), GaussianNB()
+@author: Anna MK
+"""
+
+# Running selected classifiers with hardcoded 3 of them: LogisticRegression(), RandomForestClassifier(), GaussianNB()
 
 from sklearn import datasets
 from sklearn import cross_validation
