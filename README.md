@@ -15,7 +15,7 @@ The script to use for text processing is "create_data_frame". This essentially c
 
 Exemplary command line:
 ```
-	create_data_frame.py -s --sw --th 
+./create_data_frame.py -s --sw --th 
 ```
 Stemmatizes, removes stop words then tokenizes the input file according to the directory structure (one cell per section of the hierarchy). Output file will be saved in the default location with the default filename. 
 
@@ -45,7 +45,7 @@ This is essentially the bag of words function adapted to allow tokenization of t
 
 E.g:
 ```
-create_bow_fm_dataframe.py -i ../../data/features/words/none_iTrain.csv -o none_iTrain_stri.p
+./create_bow_fm_dataframe.py -i ../../data/features/words/none_iTrain.csv -o none_iTrain_stri.p
 ```
 
 This call uses default flags. It takes in the output data frame saved in *none_iTrain.csv* created in Step 1. It then adds the charity type and name to the description list and then creates a bag of words from the hierarchical items. 
@@ -68,14 +68,14 @@ Output is a pickle (*.p*) data structure (= *.pkl*)
 The script to use for running a full pipeline of the code including bag-of-words or TFIDF feature extraction and classification, is *run_pipeline_wordfeats.py*. In the example below, the classification is performed on TFIDF features, using decision tree classifier and for the first classification task (income type) ::
 
 ```
-run_pipeline_wordfeats -i data/features/iTrain_stri.pkl --ti -c decision-tree --cat income-type --od data/res/iTrain_typeres_decision_tree.csv
+./run_pipeline_wordfeats.py -i data/features/iTrain_stri.pkl --ti -c decision-tree --cat income-type --od data/res/iTrain_typeres_decision_tree.csv
 ```
 
 The script will print the accuracy of the prediction and will output a *.csv* file with the original and the predicted classes for all the samples.
 
 The default classifier values in this script are the ones that work the best based on the grid parameter search that we performed. If you want, you can run your own grid parameter search using the script ``gridsearch_classifiers_wordfeats.py``. To run the grid parameter search for TFIDF features and decision tree and for the first classification tasks (income type), run the following command:
 ```
-gridsearch_classfiers_wordfeats -i data/features/iTrain_stri.pkl --ti -c decision-tree --cat income-type --od data/gridres/iTrain_gridres_decision_tree.pkl
+./gridsearch_classfiers_wordfeats.py -i data/features/iTrain_stri.pkl --ti -c decision-tree --cat income-type --od data/gridres/iTrain_gridres_decision_tree.pkl
 ```
 
 The script will print the parameters and the accuracy for the best classifier and will save them in a pickle file. This file can be reused in the *run_pipeline_wordfeats* script, by specifying the *-g* option.
@@ -87,7 +87,7 @@ To see all the options for the classification or grid search script, just type *
 
 Joined accuracy for the type and source of income can be computed using the following command::
 ```
-typesource_joined_accuracy --io data/features/iTrain_stri.pkl --it data/res/iTrain_typeres_decision_tree.csv --is data/res/iTrain_sourceres_decision_tree.csv -o data/res/iTrain_joined_res.csv
+./typesource_joined_accuracy.py --io data/features/iTrain_stri.pkl --it data/res/iTrain_typeres_decision_tree.csv --is data/res/iTrain_sourceres_decision_tree.csv -o data/res/iTrain_joined_res.csv
 ```
 
 To see all the options for the classification or grid search script use *—help* at the command line.  
@@ -97,6 +97,6 @@ Step 5: Plotting the results
 
 You can plot confusion matrix showing which labels were most frequently confused by the algorithm on some classification task using the following command (for income type):
 ```
-plot_conf_matrix -i data/res/iTrain_typeres_decision_tree.csv --cat income-type
+./plot_confusion_matrices.py -i data/res/iTrain_typeres_decision_tree.csv --cat income-type
 ```
 
